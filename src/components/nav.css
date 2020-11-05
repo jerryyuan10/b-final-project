@@ -1,0 +1,29 @@
+.nav {
+  color: rgb(2, 50, 153);
+  margin: 1rem;
+  text-align: center;
+  transition: color 0.15s, background-color 0.15s;
+}
+
+.nav__link {
+  background-color: transparent;
+  color: rgb(2, 50, 153);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: 0.15s all;
+}
+
+.nav__link:visited {
+  background-color: transparent;
+  color: rgb(2, 50, 153);
+}
+
+.nav__link:hover {
+  background-color: rgb(2, 50, 153);
+  color: white;
+  text-decoration: underline;
+}
+
+.nav__link:active {
+  color: rgb(153, 153, 153);
+}

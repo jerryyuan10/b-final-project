@@ -1,0 +1,37 @@
+[
+    {
+      "name": "Burj Khalifa",
+      "rating": 4.7,
+      "completeYear": 2010
+    },
+    {
+      "name": "Shanghai Tower",
+      "rating": 4.6,
+      "completeYear": 2015
+    },
+    {
+      "name": "Abraj Al-Bait Clock Tower",
+      "rating": 4.5,
+      "completeYear": 2012
+    },
+    {
+      "name": "Lotte World Tower",
+      "rating": 4.4,
+      "completeYear": 2016
+    },
+    {
+      "name": "Shanghai World Financial Center",
+      "rating": 4.6,
+      "completeYear": 2008
+    },
+    {
+      "name": "Central Park Tower",
+      "rating": 4.6,
+      "completeYear": 2020
+    },
+    {
+      "name": "Landmark 81",
+      "rating": 4.5,
+      "completeYear": 2018
+    }
+  ]
