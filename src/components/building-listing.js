@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LoadingSpinner from "./loading-spinner";
 import ErrorMessage from "./error-message";
 import "./building-listing.css";
+import { buildingsCollection } from "../data/firebase";
+import Building from "./building";
 
 // useEffect Hook:
 // > Guide, https://reactjs.org/docs/hooks-effect.html
@@ -11,6 +13,36 @@ function BuildingListing() {
   const [buildings, setBuildings] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    setIsLoading(true);
+    const onNext = (snapshot) => {
+      setIsLoading(false);
+      const docs = snapshot.docs;
+      setBuildings(docs);
+    };
+    const onError = (error) => {
+      setErrorMessage("There was a problem. Please try again.");
+      console.error(error);
+    };
+    const unsubscribe = buildingsCollection.onSnapshot(onNext, onError);
+    return unsubscribe;
+    }, []);
+
+  // function ratingOrder() {
+  //   setIsLoading(true);
+  //     const onNext = (snapshot) => {
+  //       setIsLoading(false);
+  //       const docs = snapshot.docs;
+  //       setBuildings(docs);
+  //     };
+  //       const onError = (error) => {
+  //       setErrorMessage("There was a problem. Please try again.");
+  //       console.error(error);
+  //     };
+  //       const unsubscribe = buildingsCollection.orderBy("rating", "desc").onSnapshot(onNext, onError);
+  //       return unsubscribe; 
+  //   };
 
   return (
     <div className="buildings-container">
@@ -23,7 +55,20 @@ function BuildingListing() {
         />
       )}
       {errorMessage && <ErrorMessage displayAsCard>{errorMessage}</ErrorMessage>}
-      <ul className="building-list">Buildings show here!</ul>
+      <div>
+      {/* <button type="button" onClick={ratingOrder} >Sort by height ⬇</button> */}
+      <ul className="building-list">
+        {buildings.map((buildingDoc) => {
+          const buildingName = buildingDoc.id;
+          const buildingData = buildingDoc.data();
+          return (
+            <li className="building-list" key={buildingName}>
+              <Building id={buildingName} data={buildingData} />
+            </li>
+          )
+        })}
+      </ul>
+      </div>
     </div>
   );
 }

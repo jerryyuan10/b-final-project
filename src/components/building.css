@@ -1,7 +1,7 @@
 .building {
   padding: 1rem;
   width: 300px;
-  min-height: 125px;
+  min-height: 185px;
   background-color: #fff;
   color: #151116;
   border-radius: 10px;
@@ -19,6 +19,10 @@
   color: #151116;
   transition: all 0.15s;
   outline: none;
+}
+
+.building__button:disabled {
+  opacity: 0.6;
 }
 
 .building__button:focus {
@@ -44,10 +48,25 @@
   margin-bottom: 0.25rem;
 }
 
-.building__title {
+.building__name {
+  font-size: large;
   font-weight: bold;
 }
 
-.building__year {
+.building__height {
+  color: rgb(2, 50, 153);
+  font-weight: normal;
+}
+
+.building__review {
   font-style: italic;
+}
+
+.building__materials {
+  font-style: normal;
+}
+
+.building__location {
+  font-style: italic;
+  color: gray;
 }

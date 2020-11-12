@@ -1,6 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import AddMBuilding from "../components/add-building";
+import AddBuilding from "../components/add-building";
 
 function AddBuildingPage() {
   return (
@@ -8,7 +8,7 @@ function AddBuildingPage() {
       <Helmet>
         <title>Add</title>
       </Helmet>
-      <AddMBuilding />
+      <AddBuilding />
     </main>
   );
 }

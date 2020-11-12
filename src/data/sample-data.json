@@ -1,36 +1,47 @@
 [
     {
       "name": "Burj Khalifa",
+      "height": 2717,
       "rating": 4.7,
-      "completeYear": 2010
+      "completeYear": 2010,
+      "review": "Amazing building to watch but the pricing per person seems too costly.",
+      "materials": ["Reinforced concrete", "Steel", "Aluminium"]
     },
     {
       "name": "Shanghai Tower",
+      "height": 2073,
       "rating": 4.6,
-      "completeYear": 2015
+      "completeYear": 2015,
+      "review": "It's worth visiting even just for the view from the highest observation deck in China."
     },
     {
       "name": "Abraj Al-Bait Clock Tower",
+      "height": 1971,
       "rating": 4.5,
       "completeYear": 2012
     },
     {
       "name": "Lotte World Tower",
+      "height": 1819,
       "rating": 4.4,
       "completeYear": 2016
     },
     {
-      "name": "Shanghai World Financial Center",
-      "rating": 4.6,
-      "completeYear": 2008
+      "name": "One World Trade Center",
+      "height": 1776,
+      "rating": 4.7,
+      "completeYear": 2014,
+      "review": "Astonishing. Not only for what it represents, but also for its impressive engineering and architecture."
     },
     {
       "name": "Central Park Tower",
+      "height": 1550,
       "rating": 4.6,
       "completeYear": 2020
     },
     {
       "name": "Landmark 81",
+      "height": 1513,
       "rating": 4.5,
       "completeYear": 2018
     }
