@@ -36,7 +36,7 @@ function EditBuilding(props) {
     getBuilding();
   }, [id]);
 
-  const onBuildingSubmit = async (name, height, completeYear, rating, materials, review) => {
+  const onBuildingSubmit = async (name, height, completeYear, rating, materials, review, buildingLocation) => {
     setIsSaving(true);
     setForMessage("");
 
@@ -48,6 +48,7 @@ function EditBuilding(props) {
         rating,
         materials,
         review,
+        buildingLocation,
       })
       setForMessage("Savd successfully!");
     } catch (error) {

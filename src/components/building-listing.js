@@ -58,8 +58,8 @@ function BuildingListing() {
       )}
       {errorMessage && <ErrorMessage displayAsCard>{errorMessage}</ErrorMessage>}
       <div>
-      <button type="button" onClick={onButtonClickRating} >Sort by rating ⬇</button>
-      <button type="button" onClick={onButtonClickHeight} >Sort by height ⬇</button>
+      <button className="button-click" type="button" onClick={onButtonClickRating} >Sort by rating ⬇</button>
+      <button className="button-click" type="button" onClick={onButtonClickHeight} >Sort by height ⬇</button>
       <ul className="building-list">
         {buildings.map((buildingDoc) => {
           const buildingName = buildingDoc.id;

@@ -16,3 +16,28 @@
   align-items: center;
   justify-content: space-around;
 }
+
+.button-click {
+  box-sizing: border-box;
+  background-color: white;
+  border: 2px solid rgb(2, 50, 153);
+  border-radius: 0.6em;
+  color: rgb(2, 50, 153);
+  cursor: pointer;
+  align-self: center;
+  font-size: 1rem;
+  line-height: 1;
+  margin: 20px;
+  padding: 0.5em;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+}
+
+.button-click:hover {
+  box-shadow: 0 0 40px 40px rgb(2, 50, 153) inset;
+  color: white;
+}

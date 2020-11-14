@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import ErrorMessage from "./error-message";
 import "./building-form.css";
-import { buildingsCollection } from "../data/firebase";
+import db, { buildingsCollection } from "../data/firebase";
+import firebase from "firebase/app";
 
 function BuildingForm(props) {
   const { initialState = {}, message, isSaving, onSubmit } = props;
 
   if (initialState.name === undefined) initialState.name = "";
-  if (initialState.height === undefined) initialState.height = 1111;
+  if (initialState.height === undefined) initialState.height = 1597;
   if (initialState.completeYear === undefined) initialState.completeYear = 2020;
   if (initialState.rating === undefined) initialState.rating = 4;
   if (initialState.materials === undefined) initialState.materials = [""];
   if (initialState.review === undefined) initialState.review = "";
-  // if (initialState.buildingLocation === undefined) initialState.buildingLocation = [40.713112, -74.011345]
+  // if (initialState.buildingLocation === undefined) initialState.buildingLocation = "";
 
   const [name, setName] = useState(initialState.name);
   const [height, setHeight] = useState(initialState.height);
@@ -20,7 +21,8 @@ function BuildingForm(props) {
   const [rating, setRating] = useState(initialState.rating);
   const [materials, setMaterials] = useState(initialState.materials);
   const [review, setReview] = useState(initialState.review);
-  // const [buildingLocation, setBuildingLocation] = useState(initialState.buildingLocation);
+
+  const [buildingLocation, setBuildingLocation] = useState(0);
 
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -43,13 +45,13 @@ function BuildingForm(props) {
   const onReviewChange = (event) => {
     setReview(event.target.value);
   };
-  // const onBuildingLocationChange = (event) => {
-  //   setBuildingLocation(event.target.value);
-  // };
+  const onBuildingLocationChange = (event) => {
+    setBuildingLocation(event.target.value);
+  };
 
   const onBuildingSubmit = async (event) => {
     event.preventDefault();
-    onSubmit(name, height, completeYear, rating, materials, review);
+    onSubmit(name, height, completeYear, rating, materials, review, buildingLocation);
   };
 
   return (
@@ -82,8 +84,8 @@ function BuildingForm(props) {
         <input className="building-form__input" type="text" value={materials} onChange={onMaterialsChange} />
         <label className="building-form__label">Review:</label>
         <textarea className="building-form__input" type="text" value={review} rows="3" onChange={onReviewChange} />
-        {/* <label className="building-form__label">Location:</label>
-        <input className="building-form__input" type="text" value={buildingLocation} onChange={onBuildingLocationChange} /> */}
+        <label className="building-form__label">Location:</label>
+        <input className="building-form__input" type="text" value={buildingLocation} onChange={onBuildingLocationChange} />
         <input
           className="building-form__submit"
           type="submit"
