@@ -10,7 +10,7 @@ function BuildingForm(props) {
   if (initialState.height === undefined) initialState.height = 1111;
   if (initialState.completeYear === undefined) initialState.completeYear = 2020;
   if (initialState.rating === undefined) initialState.rating = 4;
-  // if (initialState.materials === undefined) initialState.materials = [""];
+  if (initialState.materials === undefined) initialState.materials = [""];
   if (initialState.review === undefined) initialState.review = "";
   // if (initialState.buildingLocation === undefined) initialState.buildingLocation = [40.713112, -74.011345]
 
@@ -18,7 +18,7 @@ function BuildingForm(props) {
   const [height, setHeight] = useState(initialState.height);
   const [completeYear, setCompleteYear] = useState(initialState.completeYear);
   const [rating, setRating] = useState(initialState.rating);
-  // const [materials, setMaterials] = useState(initialState.materials);
+  const [materials, setMaterials] = useState(initialState.materials);
   const [review, setReview] = useState(initialState.review);
   // const [buildingLocation, setBuildingLocation] = useState(initialState.buildingLocation);
 
@@ -28,18 +28,18 @@ function BuildingForm(props) {
   const onNameChange = (event) => {
     setName(event.target.value);
   };
-  const onHeightChange = (event) => {
-    setHeight(event.target.value);
+  const onHeightChange = (event) => {    
+    setHeight(Number(event.target.value));
   };
   const onYearCompletedChange = (event) => {
-    setCompleteYear(event.target.value);
+    setCompleteYear(Number(event.target.value));
   };
   const onRatingChange = (event) => {
-    setRating(event.target.value);
+    setRating(Number(event.target.value));
   };
-  // const onMaterialsChange = (event) => {
-  //   setMaterials(event.target.value);
-  // };
+  const onMaterialsChange = (event) => {
+    setMaterials((event.target.value).split(","));
+  };
   const onReviewChange = (event) => {
     setReview(event.target.value);
   };
@@ -49,7 +49,7 @@ function BuildingForm(props) {
 
   const onBuildingSubmit = async (event) => {
     event.preventDefault();
-    onSubmit(name, height, completeYear, rating, review);
+    onSubmit(name, height, completeYear, rating, materials, review);
   };
 
   return (
@@ -78,8 +78,8 @@ function BuildingForm(props) {
           max="5"
           onChange={onRatingChange}
         />
-         {/* <label className="building-form__label">Materials:</label>
-        <input className="building-form__input" type="text" value={materials} onChange={onMaterialsChange} /> */}
+         <label className="building-form__label">Materials: </label>
+        <input className="building-form__input" type="text" value={materials} onChange={onMaterialsChange} />
         <label className="building-form__label">Review:</label>
         <textarea className="building-form__input" type="text" value={review} rows="3" onChange={onReviewChange} />
         {/* <label className="building-form__label">Location:</label>

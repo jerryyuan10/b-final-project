@@ -14,6 +14,8 @@ function BuildingListing() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const [sort, setSort] = useState(null);
+
   useEffect(() => {
     setIsLoading(true);
     const onNext = (snapshot) => {
@@ -25,24 +27,24 @@ function BuildingListing() {
       setErrorMessage("There was a problem. Please try again.");
       console.error(error);
     };
-    const unsubscribe = buildingsCollection.onSnapshot(onNext, onError);
+    let unsubscribe;
+    if (sort === "height") {
+      unsubscribe = buildingsCollection.orderBy("height","desc").onSnapshot(onNext, onError);
+    } else if (sort === "rating") {
+      unsubscribe = buildingsCollection.orderBy("rating","desc").onSnapshot(onNext, onError);
+    } else {
+      unsubscribe = buildingsCollection.onSnapshot(onNext, onError);
+    };
     return unsubscribe;
-    }, []);
+    }, [sort]);
 
-  // function ratingOrder() {
-  //   setIsLoading(true);
-  //     const onNext = (snapshot) => {
-  //       setIsLoading(false);
-  //       const docs = snapshot.docs;
-  //       setBuildings(docs);
-  //     };
-  //       const onError = (error) => {
-  //       setErrorMessage("There was a problem. Please try again.");
-  //       console.error(error);
-  //     };
-  //       const unsubscribe = buildingsCollection.orderBy("rating", "desc").onSnapshot(onNext, onError);
-  //       return unsubscribe; 
-  //   };
+    const onButtonClickRating = () => {
+      setSort("rating");
+    }
+
+    const onButtonClickHeight = () => {
+      setSort("height");
+    }
 
   return (
     <div className="buildings-container">
@@ -56,7 +58,8 @@ function BuildingListing() {
       )}
       {errorMessage && <ErrorMessage displayAsCard>{errorMessage}</ErrorMessage>}
       <div>
-      {/* <button type="button" onClick={ratingOrder} >Sort by height ⬇</button> */}
+      <button type="button" onClick={onButtonClickRating} >Sort by rating ⬇</button>
+      <button type="button" onClick={onButtonClickHeight} >Sort by height ⬇</button>
       <ul className="building-list">
         {buildings.map((buildingDoc) => {
           const buildingName = buildingDoc.id;
