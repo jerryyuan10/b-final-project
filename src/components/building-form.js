@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import ErrorMessage from "./error-message";
 import "./building-form.css";
-import db, { buildingsCollection } from "../data/firebase";
-import firebase from "firebase/app";
+// import db, { buildingsCollection } from "../data/firebase";
+// import firebase from "firebase/app";
 
 function BuildingForm(props) {
   const { initialState = {}, message, isSaving, onSubmit } = props;
@@ -25,7 +25,7 @@ function BuildingForm(props) {
   const [buildingLocation, setBuildingLocation] = useState(0);
 
 
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage] = useState("");
 
   const onNameChange = (event) => {
     setName(event.target.value);

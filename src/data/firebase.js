@@ -2,13 +2,13 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCCwFCJdbIvYs_lBDPFmIwAt1cgmSBxQkQ",
-    authDomain: "code-sprint-b-final-yy.firebaseapp.com",
-    databaseURL: "https://code-sprint-b-final-yy.firebaseio.com",
-    projectId: "code-sprint-b-final-yy",
-    storageBucket: "code-sprint-b-final-yy.appspot.com",
-    messagingSenderId: "1035022302523",
-    appId: "1:1035022302523:web:9beaabdc35b5fb50b98b1e"
+    apiKey: process.env.REACT_APP_API_KEY,
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+    databaseURL: process.env.REACT_APP_DATABASE_URL,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_APP_ID,
   };
 
   firebase.initializeApp(firebaseConfig);
