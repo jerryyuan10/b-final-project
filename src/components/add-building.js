@@ -1,35 +1,14 @@
-import React, { useState } from "react";
-import { buildingsCollection } from "../data/firebase";
+import React from "react";
+import useSaveBuilding from "../hooks/use-save-building";
 import "./add-building.css";
 import BuildingForm from "./building-form";
 
 function AddBuilding() {
-  const [isSaving, setIsSaving] = useState(false);
-  const [formMessage, setFormMessage] = useState("");
+
+  const [save, isSaving, formMessage] = useSaveBuilding();
 
   const onBuildingSumbit = async (name, height, completeYear, rating, review) => {
-    
-    setIsSaving(true);
-    setFormMessage("");
-
-    try {
-      await buildingsCollection.add({
-        name: name,
-        height: height,
-        completeYear: completeYear,
-        rating: rating,
-        // materials: materials,
-        review: review,
-        // buildingLocation,
-      });
-      setFormMessage("Saved successfully!")
-      console.log("Saved!");
-    } catch (error) {
-      setFormMessage("Something went wrong. Please try again!")
-      console.error(error);
-    }
-
-    setIsSaving(false);
+    save({name, height, completeYear, rating, review});
   };
 
   return (

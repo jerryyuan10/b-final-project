@@ -17,6 +17,6 @@ In this project, users will be able to see the name and the height of the buildi
 
 ### A quick view of the app
 
-![Screenshot of Home Page](https://github.com/jerryyuan10/b-final-project/tree/master/src/images/Screenshot-Home-page.png)
-![Screenshot of Edit Page](https://github.com/jerryyuan10/b-final-project/tree/master/src/images/Screenshot-editPage.png)
-![Screenshot of Add Page](https://github.com/jerryyuan10/b-final-project/tree/master/src/images/Screenshot-addPage.png)
+![Screenshot of Home Page](src/images/Screenshot-Home-page.png)
+![Screenshot of Edit Page](src/images/Screenshot-editPage.png)
+![Screenshot of Add Page](src/images/Screenshot-addPage.png)

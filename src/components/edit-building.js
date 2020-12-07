@@ -1,62 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import useBuilding from "../hooks/use-building";
+import useSaveBuilding from "../hooks/use-save-building";
 import "./edit-building.css";
 import ErrorMessage from "./error-message";
 import LoadingSpinner from "./loading-spinner";
 import BuildingForm from "./building-form";
-import { buildingsCollection } from "../data/firebase";
 
 function EditBuilding(props) {
   const { id } = props;
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [buildingData, setBuildingData] = useState(null);
-  const [isSaving, setIsSaving] = useState(false);
-  const [forMessage, setForMessage] = useState("");
-
-  useEffect(() => {
-    async function getBuilding() {
-      setIsLoading(true);
-      try {
-        const buildingSnapShot = await buildingsCollection.doc(id).get();
-
-        if(!buildingSnapShot.exists) {
-          throw new Error("No such building exists!");
-        }
-
-        const data = buildingSnapShot.data();
-        setBuildingData(data);
-      } catch (error) {
-        setErrorMessage("Something went wrong. Please try again.");
-        console.error(error);
-      }
-      setIsLoading(false);
-    }
-
-    getBuilding();
-  }, [id]);
+  const [buildingData, isLoading, errorMessage] = useBuilding(id);
+  const [save, isSaving, formMessage] = useSaveBuilding();
 
   const onBuildingSubmit = async (name, height, completeYear, rating, materials, review, buildingLocation) => {
-    setIsSaving(true);
-    setForMessage("");
-
-    try {
-      await buildingsCollection.doc(id).set({
-        name,
-        height,
-        completeYear,
-        rating,
-        materials,
-        review,
-        buildingLocation,
-      })
-      setForMessage("Savd successfully!");
-    } catch (error) {
-      setForMessage("Something went wrong editing this building. Please try again.");
-      console.error(error);
-    }
-
-    setIsSaving(false);
+    save({ name, height, completeYear, rating, materials, review, buildingLocation }, id);
   };
 
   return (
@@ -70,7 +27,7 @@ function EditBuilding(props) {
         />
       )}
       {errorMessage && <ErrorMessage displayAsCard>{errorMessage}</ErrorMessage>}
-      {buildingData && <BuildingForm initialState={buildingData} onSubmit={onBuildingSubmit} isSaving={isSaving} message={forMessage} />}
+      {buildingData && <BuildingForm initialState={buildingData} onSubmit={onBuildingSubmit} isSaving={isSaving} message={formMessage} />}
     </div>
   );
 }
