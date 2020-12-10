@@ -7,13 +7,14 @@ import LoadingSpinner from "./loading-spinner";
 import BuildingForm from "./building-form";
 
 function EditBuilding(props) {
-  const { id } = props;
+  const userId = props.user.uid;
+  const buildingId = props.id;
 
-  const [buildingData, isLoading, errorMessage] = useBuilding(id);
+  const [buildingData, isLoading, errorMessage] = useBuilding(userId, buildingId);
   const [save, isSaving, formMessage] = useSaveBuilding();
 
   const onBuildingSubmit = async (name, height, completeYear, rating, materials, review, buildingLocation) => {
-    save({ name, height, completeYear, rating, materials, review, buildingLocation }, id);
+    save({ name, height, completeYear, rating, materials, review, buildingLocation }, userId, buildingId);
   };
 
   return (

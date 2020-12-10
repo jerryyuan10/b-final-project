@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { buildingsCollection } from "../data/firebase";
+import { usersCollection } from "../data/firebase";
 
 // useEffect Hook:
 // > Guide, https://reactjs.org/docs/hooks-effect.html
 // > API Docs, https://reactjs.org/docs/hooks-reference.html#useeffect
 
-function useAllBuildings() {
+function useAllBuildings(userId) {
     const [buildings, setBuildings] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
@@ -29,11 +29,11 @@ function useAllBuildings() {
       let unsubscribe;
 
       if (sort === "height") {
-        unsubscribe = buildingsCollection.orderBy("height","desc").onSnapshot(onNext, onError);
+        unsubscribe = usersCollection.doc(userId).collection("buildings").orderBy("height","desc").onSnapshot(onNext, onError);
       } else if (sort === "rating") {
-        unsubscribe = buildingsCollection.orderBy("rating","desc").onSnapshot(onNext, onError);
+        unsubscribe = usersCollection.doc(userId).collection("buildings").orderBy("rating","desc").onSnapshot(onNext, onError);
       } else {
-        unsubscribe = buildingsCollection.onSnapshot(onNext, onError);
+        unsubscribe = usersCollection.doc(userId).collection("buildings").onSnapshot(onNext, onError);
       };
 
       return unsubscribe;

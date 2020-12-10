@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { buildingsCollection } from "../data/firebase";
+import { usersCollection } from "../data/firebase";
 
-function useBuilding(id) {
+function useBuilding(userId, buildingId) {
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [buildingData, setBuildingData] = useState(null);
@@ -11,7 +11,7 @@ function useBuilding(id) {
         setIsLoading(true);
         
         try {
-          const buildingSnapShot = await buildingsCollection.doc(id).get();
+          const buildingSnapShot = await usersCollection.doc(userId).collection("buildings").doc(buildingId).get();
   
           if(!buildingSnapShot.exists) {
             throw new Error("No such building exists!");
@@ -27,7 +27,7 @@ function useBuilding(id) {
       }
   
       getBuilding();
-    }, [id]);
+    }, [userId, buildingId]);
 
     return [buildingData, isLoading, errorMessage];
 };

@@ -5,8 +5,9 @@ import useAllBuildings from "../hooks/use-all-buildings";
 import "./building-listing.css";
 import Building from "./building";
 
-function BuildingListing() {
-  const [buildings, isLoading, errorMessage, onButtonClickRating, onButtonClickHeight] = useAllBuildings();
+function BuildingListing(props) {
+  const userId = props.user.uid;
+  const [buildings, isLoading, errorMessage, onButtonClickRating, onButtonClickHeight] = useAllBuildings(userId);
 
 
   return (
@@ -29,7 +30,7 @@ function BuildingListing() {
           const buildingData = buildingDoc.data();
           return (
             <li className="building-list" key={buildingName}>
-              <Building id={buildingName} data={buildingData} />
+              <Building id={buildingName} data={buildingData} userId={userId} />
             </li>
           )
         })}

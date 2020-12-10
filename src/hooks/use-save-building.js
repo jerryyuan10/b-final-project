@@ -1,19 +1,19 @@
 import { useState } from "react";
-import { buildingsCollection } from "../data/firebase";
+import { usersCollection } from "../data/firebase";
 
 function useSaveBuilding() {
     const [isSaving, setIsSaving] = useState(false);
     const [formMessage, setFormMessage] = useState("");
   
-    const save = async (buildingData, id) => {
+    const save = async (buildingData, userId, buildingId) => {
       setIsSaving(true);
       setFormMessage("");
   
       try {
-        if (id === undefined) {
-            await buildingsCollection.add(buildingData);
+        if (buildingId === undefined) {
+            await usersCollection.doc(userId).collection("buildings").add(buildingData);
         } else {
-            await buildingsCollection.doc(id).set(buildingData);
+            await usersCollection.doc(userId).collection("buildings").doc(buildingId).set(buildingData);
         }
         setFormMessage("Savd successfully!");
       } catch (error) {

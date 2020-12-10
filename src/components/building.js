@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { Delete, Edit } from "@material-ui/icons";
 import ErrorMessage from "./error-message";
 import "./building.css";
-import { buildingsCollection } from "../data/firebase";
+import { usersCollection } from "../data/firebase";
 import { useHistory } from "react-router-dom";
 
 function Building(props) {
-  const { id, data } = props;
+  const { id, data, userId } = props;
   const { name, completeYear, rating, height, review, materials, buildingLocation } = data;
 
   const ratingString = "💙".repeat(rating) + "🤍".repeat(5.9 - rating);
@@ -19,7 +19,7 @@ function Building(props) {
     setIsDeleting(true);
     setErrorMessage("");
     try {
-      const docRef = buildingsCollection.doc(id);
+      const docRef = usersCollection.doc(userId).collection("buildings").doc(id);
       await docRef.delete();
     } catch (error) {
       console.error(error);

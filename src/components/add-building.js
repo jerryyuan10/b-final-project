@@ -3,12 +3,12 @@ import useSaveBuilding from "../hooks/use-save-building";
 import "./add-building.css";
 import BuildingForm from "./building-form";
 
-function AddBuilding() {
-
+function AddBuilding(props) {
+  const userId = props.user.uid;
   const [save, isSaving, formMessage] = useSaveBuilding();
 
   const onBuildingSumbit = async (name, height, completeYear, rating, review) => {
-    save({name, height, completeYear, rating, review});
+    save({name, height, completeYear, rating, review}, userId);
   };
 
   return (

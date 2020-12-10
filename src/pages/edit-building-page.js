@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { useParams } from "react-router-dom";
 import EditBuilding from "../components/edit-building";
 
-function EditBuildingPage() {
+function EditBuildingPage(props) {
   const { id } = useParams();
 
   return (
@@ -11,7 +11,7 @@ function EditBuildingPage() {
       <Helmet>
         <title>Edit</title>
       </Helmet>
-      <EditBuilding id={id}/>
+      <EditBuilding id={id} {...props} />
     </main>
   );
 }
