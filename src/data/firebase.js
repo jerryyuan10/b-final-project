@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
+import "firebase/auth";
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
@@ -13,8 +14,12 @@ const firebaseConfig = {
 
   firebase.initializeApp(firebaseConfig);
 
+  const provider = new firebase.auth.GoogleAuthProvider();
+  const auth = firebase.auth();
+
   const db = firebase.firestore();
   const buildingsCollection = db.collection("buildings");
+  const usersCollection = db.collection("users");
 
   export default db;
-  export { buildingsCollection };
+  export { buildingsCollection, usersCollection, provider, auth, firebase };
