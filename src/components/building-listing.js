@@ -7,7 +7,7 @@ import Building from "./building";
 
 function BuildingListing(props) {
   const userId = props.user.uid;
-  const [buildings, isLoading, errorMessage, onButtonClickRating, onButtonClickHeight] = useAllBuildings(userId);
+  const [buildings, isLoading, errorMessage, onButtonClickRating, onButtonClickHeight, onButtonClickYear] = useAllBuildings(userId);
 
 
   return (
@@ -24,6 +24,7 @@ function BuildingListing(props) {
       <div>
       <button className="button-click" type="button" onClick={onButtonClickRating} >Sort by rating ⬇</button>
       <button className="button-click" type="button" onClick={onButtonClickHeight} >Sort by height ⬇</button>
+      <button className="button-click" type="button" onClick={onButtonClickYear} >Sort by completed Year ⬇</button>
       <ul className="building-list">
         {buildings.map((buildingDoc) => {
           const buildingName = buildingDoc.id;

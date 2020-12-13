@@ -32,12 +32,14 @@ function useAllBuildings(userId) {
         unsubscribe = usersCollection.doc(userId).collection("buildings").orderBy("height","desc").onSnapshot(onNext, onError);
       } else if (sort === "rating") {
         unsubscribe = usersCollection.doc(userId).collection("buildings").orderBy("rating","desc").onSnapshot(onNext, onError);
+      } else if (sort === "completeYear") {
+        unsubscribe = usersCollection.doc(userId).collection("buildings").orderBy("completeYear","desc").onSnapshot(onNext, onError);
       } else {
         unsubscribe = usersCollection.doc(userId).collection("buildings").onSnapshot(onNext, onError);
       };
 
       return unsubscribe;
-      }, [sort]);
+      }, [userId, sort]);
 
       const onButtonClickRating = () => {
         setSort("rating");
@@ -47,7 +49,11 @@ function useAllBuildings(userId) {
         setSort("height");
       }
 
-    return [buildings, isLoading, errorMessage, onButtonClickRating, onButtonClickHeight];
+      const onButtonClickYear = () => {
+        setSort("completeYear");
+      }
+
+    return [buildings, isLoading, errorMessage, onButtonClickRating, onButtonClickHeight, onButtonClickYear];
 }
 
 export default useAllBuildings;

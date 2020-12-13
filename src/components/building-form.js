@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import ErrorMessage from "./error-message";
 import "./building-form.css";
 // import db, { buildingsCollection } from "../data/firebase";
-// import firebase from "firebase/app";
+import firebase from "firebase/app";
+import { Label } from "@material-ui/icons";
 
 function BuildingForm(props) {
   const { initialState = {}, message, isSaving, onSubmit } = props;
@@ -23,6 +24,8 @@ function BuildingForm(props) {
   const [review, setReview] = useState(initialState.review);
 
   const [buildingLocation, setBuildingLocation] = useState(0);
+  const [latitude, setLatitude] = useState(0);
+  const [longitude, setLongitude] = useState(0);
 
 
   const [errorMessage] = useState("");
@@ -45,6 +48,21 @@ function BuildingForm(props) {
   const onReviewChange = (event) => {
     setReview(event.target.value);
   };
+
+  // const onLatitudeChange = (event) => {
+  //   setLatitude(Number(event.target.value));
+  // };
+
+  // const onLongitudeChange = (event) => {
+  //   setLongitude(Number(event.target.value));
+  // };
+
+  // console.log(setLongitude); 
+  // console.log(onLatitudeChange); 
+  // console.log(setMaterials);
+
+  // const buildingLocation = new firebase.firestore.GeoPoint(setLatitude, setLongitude);
+
   const onBuildingLocationChange = (event) => {
     setBuildingLocation(event.target.value);
   };
@@ -84,8 +102,12 @@ function BuildingForm(props) {
         <input className="building-form__input" type="text" value={materials} onChange={onMaterialsChange} />
         <label className="building-form__label">Review:</label>
         <textarea className="building-form__input" type="text" value={review} rows="3" onChange={onReviewChange} />
-        <label className="building-form__label">Location:</label>
-        <input className="building-form__input" type="text" value={buildingLocation} onChange={onBuildingLocationChange} />
+        {/* <label className="building-form__label">Location:</label>
+        <input className="building-form__input" type="number" value={buildingLocation} onChange={onBuildingLocationChange} /> */}
+        {/* <label className="building-form__label">latitude:</label>
+        <input className="building-form__input" type="number" value={latitude} onChange={onLatitudeChange} />
+        <label className="building-form__label">longitude:</label>
+        <input className="building-form__input" type="number" value={longitude} onChange={onLongitudeChange} /> */}
         <input
           className="building-form__submit"
           type="submit"
