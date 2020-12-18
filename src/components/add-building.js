@@ -7,8 +7,8 @@ function AddBuilding(props) {
   const userId = props.user.uid;
   const [save, isSaving, formMessage] = useSaveBuilding();
 
-  const onBuildingSumbit = async (name, height, completeYear, rating, review) => {
-    save({name, height, completeYear, rating, review}, userId);
+  const onBuildingSumbit = async (name, height, completeYear, rating, materials, review, buildingLocation) => {
+    save({name, height, completeYear, rating, materials, review, buildingLocation}, userId);
   };
 
   return (

@@ -36,9 +36,10 @@ function Building(props) {
         <div className="building__rating">Completed Year: {completeYear}</div>
         <div className="building__rating">{ratingString}</div>
         <div className="building__rating">{rating}</div>
-        <div className="building__materials">Materials: {materials ? materials.join(",") : "No data saved."}</div>
+        <div className="building__materials">Materials: {materials ? `${materials.join(",")}` : "No data saved."}</div>
         <div className="building__review">Review: "{review ? review : "No review saved."}"</div>
-        <div className="building__location">Location: {buildingLocation ? buildingLocation : "No location saved."}</div>
+        {/* <div>{buildingLocation.latitude}, {buildingLocation.longitude}</div> */}
+        <div className="building__location">Location: {buildingLocation ? `${buildingLocation.latitude}, ${buildingLocation.longitude}` : "No location saved."}</div>
         {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
       </div>
       <div>
