@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Delete, Edit } from "@material-ui/icons";
-import ErrorMessage from "./error-message";
-import "./building.css";
-import { usersCollection } from "../data/firebase";
 import { useHistory } from "react-router-dom";
+import ErrorMessage from "./error-message";
+import useDeleteBuilding from "../hooks/use-delete-building";
+import "./building.css";
 
 function Building(props) {
   const { id, data, userId } = props;
@@ -12,21 +12,8 @@ function Building(props) {
   const ratingString = "💙".repeat(rating) + "🤍".repeat(5.9 - rating);
 
   const history = useHistory();
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [isDeleting, errorMessage, deleteBuilding] = useDeleteBuilding(userId, id);
 
-  const deleteBuilding = async () => {
-    setIsDeleting(true);
-    setErrorMessage("");
-    try {
-      const docRef = usersCollection.doc(userId).collection("buildings").doc(id);
-      await docRef.delete();
-    } catch (error) {
-      console.error(error);
-      setErrorMessage("Something went wrong while deleting. Please try again.");
-      setIsDeleting(false);
-    }
-  };
 
   return (
     <div className="building">

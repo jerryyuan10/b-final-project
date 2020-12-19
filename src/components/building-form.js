@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import ErrorMessage from "./error-message";
 import "./building-form.css";
-// import db, { buildingsCollection } from "../data/firebase";
 import firebase from "firebase/app";
-import { Label } from "@material-ui/icons";
+// import db, { buildingsCollection } from "../data/firebase";
 
 function BuildingForm(props) {
   const { initialState = {}, message, isSaving, onSubmit } = props;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import AddBuildingPage from "../pages/add-building-page";
 import EditBuildingPage from "../pages/edit-building-page";
@@ -6,6 +6,7 @@ import BuildingsPage from "../pages/buildings-page";
 import NotFoundPage from "../pages/not-found-page";
 import AccountPage from "../pages/account-page";
 import { auth } from "../data/firebase";
+import useUser from "../hooks/use-user";
 import Nav from "./nav";
 
 function AuthenticatedRoute(props){
@@ -14,15 +15,11 @@ return <Route {...routeProps}>{isAuthenticated ? children : <Redirect to="/accou
 }
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [isLoading, error, user] = useUser(auth);
   const isAuthenticated = user !== null;
 
-  useEffect(() => {
-      const unsubscribbe = auth.onAuthStateChanged((currentUser) => {
-          setUser(currentUser)
-      });
-      return unsubscribbe;
-  }, []);
+  if (error) console.error(error);
+  if (isLoading) return null;
 
   return (
     <BrowserRouter>
