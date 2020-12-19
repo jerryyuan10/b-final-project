@@ -22,26 +22,23 @@ function BuildingForm(props) {
   const [materials, setMaterials] = useState(initialState.materials);
   const [review, setReview] = useState(initialState.review);
 
-
   // const [buildingLocation, setBuildingLocation] = useState(0);
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
 
-  
-
-  const [errorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const onNameChange = (event) => {
     setName(event.target.value);
   };
   const onHeightChange = (event) => {    
-    setHeight(Number(event.target.value));
+    setHeight(event.target.value);
   };
   const onYearCompletedChange = (event) => {
-    setCompleteYear(Number(event.target.value));
+    setCompleteYear(event.target.value);
   };
   const onRatingChange = (event) => {
-    setRating(Number(event.target.value));
+    setRating(event.target.value);
   };
   const onMaterialsChange = (event) => {
     setMaterials((event.target.value).split(","));
@@ -60,15 +57,55 @@ function BuildingForm(props) {
 
   const buildingLocation = new firebase.firestore.GeoPoint(latitude, longitude);
 
-  // console.log(setMaterials);
-
-  // const onBuildingLocationChange = (event) => {
-  //   setBuildingLocation(new firebase.firestore.GeoPoint(latitude, longitude));
-  // };
-
   const onBuildingSubmit = async (event) => {
     event.preventDefault();
-    onSubmit(name, height, completeYear, rating, materials, review, buildingLocation);
+
+    setErrorMessage("");
+
+    if (name === "" ) {
+      setErrorMessage("Please enter a building's name.");
+      return;
+    }
+    if (height === "" ) {
+      setErrorMessage("Please enter a building's height.");
+      return;
+    }
+    if (completeYear === "" ) {
+      setErrorMessage("Please enter a complete year.");
+      return;
+    }
+    if (rating === "" ) {
+      setErrorMessage("Please enter a rating.");
+      return;
+    }
+
+    const ratingAsNum = Number(rating);
+    if (Number.isNaN(ratingAsNum) || ratingAsNum < 1 || ratingAsNum > 5) {
+      setErrorMessage("Please enter a number rating between 1 and 5.");
+      return;
+    }
+    const heightAsNum = Number(height);
+    if (Number.isNaN(heightAsNum) || heightAsNum < 1 ) {
+      setErrorMessage("Please enter a valid height.");
+      return;
+    }
+    const yearAsNum = Number(completeYear);
+    if (Number.isNaN(yearAsNum) || yearAsNum % 1 !== 0 || yearAsNum < 0 || yearAsNum > 2021) {
+      setErrorMessage("Please enter a valid year.");
+      return;
+    }
+    const latitudeAsNum = Number(latitude);
+    if (Number.isNaN(latitudeAsNum) || latitudeAsNum < -90 || latitudeAsNum > 90) {
+      setErrorMessage("Please enter a valid latitude.");
+      return;
+    }
+    const longitudeAsNum = Number(longitude);
+    if (Number.isNaN(longitudeAsNum) || longitudeAsNum < -180 || longitudeAsNum > 180) {
+      setErrorMessage("Please enter a valid longitude.");
+      return;
+    }
+
+    onSubmit(name, heightAsNum, yearAsNum, ratingAsNum, materials, review, buildingLocation);
   };
 
   // console.log(latitude); 
@@ -90,7 +127,7 @@ function BuildingForm(props) {
           className="building-form__input"
           type="number"
           value={completeYear}
-          max="2020"
+          max="2021"
           onChange={onYearCompletedChange}
         />
         <label className="building-form__label">Rating:</label>
@@ -107,10 +144,10 @@ function BuildingForm(props) {
         <textarea className="building-form__input" type="text" value={review} rows="3" onChange={onReviewChange} />
         {/* <label className="building-form__label">Location:</label> */}
         {/* <input className="building-form__input" type="number" value={buildingLocation} onChange={onBuildingLocationChange} /> */}
-        <label className="building-form__label">latitude:</label>
-        <input className="building-form__input" type="number" value={latitude} min="-90" max="90" onChange={onLatitudeChange} />
-        <label className="building-form__label">longitude:</label>
-        <input className="building-form__input" type="number" value={longitude} min="-180" max="180"onChange={onLongitudeChange} />
+        <label className="building-form__label">latitude ( -90 to 90) : </label>
+        <input className="building-form__input" type="number"  value={latitude}  onChange={onLatitudeChange} />
+        <label className="building-form__label">longitude ( -180 to 180):</label>
+        <input className="building-form__input" type="number" value={longitude}  onChange={onLongitudeChange} />
         <input
           className="building-form__submit"
           type="submit"
