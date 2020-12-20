@@ -10,13 +10,18 @@ In this project, users will be able to see the name and the height of the buildi
 
 ### Current status of the app - what's build and what remains to be built
 
-- Users can add and edit the information of the buildings in this app successfully.
-- Users can sort by buildings' height or rating of the building.
+- Users can click on the inputted building name to jump to google maps to view the location of the building.
+- Users can add the GeoPoint data in the app.
+- Added a login page. Users can add, edit and delete the buildings information by themselves.
+- The information created by the user can only be seen by himself and requires login to see it.
+- Users can sort building's height, rating of the building and complete year of the building by descending order.
 - Project has the features of CRUD database operations.
-- Although users can edit or add strings, arrays and numbers in the app. I'm still struggling with how to built the Geopoint data in the app.
+
+- If the user enters latitude and longitude values beyond -90 and 90 or -180 and 180, the page will crush.
 
 ### A quick view of the app
 
-![Screenshot of Home Page](src/images/Screenshot-Home-page.png)
-![Screenshot of Edit Page](src/images/Screenshot-editPage.png)
-![Screenshot of Add Page](src/images/Screenshot-addPage.png)
+![Screenshot of Home Deafult Page](src/images/default-home-page.png)
+![Screenshot of Home Page Sort by Height](src/images/sort-by-height.png)
+![Screenshot of Login Page](src/images/login-page.png)
+![Screenshot of Add Page](src/images/add-building.png)
